@@ -17,7 +17,7 @@ archive_extensions = ('.zip', '.gz', '.tar')
 
 def find_files(path):
     for file in os.listdir(path):
-        new_path = path + '\\' + file
+        new_path = os.path.join(path, file)
 
         if os.path.isdir(new_path):
             find_files(new_path)
@@ -88,16 +88,16 @@ def rename_files():
 
         new_filename = normalize(filename)
         if extension.lower() in image_extensions:
-            new_filename = '.\\images\\' + new_filename
+            new_filename = os.path.join('.', 'images', new_filename)
         elif extension.lower() in video_extensions:
-            new_filename = '.\\videos\\' + new_filename
+            new_filename = os.path.join('.', 'videos', new_filename)
         elif extension.lower() in document_extensions:
-            new_filename = '.\\documents\\' + new_filename
+            new_filename = os.path.join('.', 'documents', new_filename)
         elif extension.lower() in music_extensions:
-            new_filename = '.\\music\\' + new_filename
+            new_filename = os.path.join('.', 'music', new_filename)
         elif extension.lower() in archive_extensions:
-            shutil.unpack_archive(file, '.\\archives\\' + new_filename)
-            new_filename = '.\\archives\\' + new_filename
+            shutil.unpack_archive(file, os.path.join('.', 'archives', new_filename))
+            new_filename = os.path.join('.', 'archives', new_filename)
         else:
             continue
 
