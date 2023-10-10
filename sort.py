@@ -118,8 +118,9 @@ def delete_empty_folders():
 
 def sort():
     for dir in dir_list:
-        if not os.path.exists(dir):
-            os.mkdir(dir)
+        dir_path = os.path.join(path, dir)
+        if not os.path.exists(dir_path):
+            os.mkdir(dir_path)
     sort_by_type()
     rename_files()
     delete_empty_folders()
