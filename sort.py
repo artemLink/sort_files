@@ -83,21 +83,22 @@ def normalize(data):
 
 def rename_files():
     files = find_files(path)
+    main_folder = os.path.basename(path)
     for file in files:
         filename, extension = os.path.splitext(os.path.basename(file))
 
         new_filename = normalize(filename)
         if extension.lower() in image_extensions:
-            new_filename = os.path.join('.', 'images', new_filename)
+            new_filename = os.path.join(main_folder, 'images', new_filename)
         elif extension.lower() in video_extensions:
-            new_filename = os.path.join('.', 'videos', new_filename)
+            new_filename = os.path.join(main_folder, 'videos', new_filename)
         elif extension.lower() in document_extensions:
-            new_filename = os.path.join('.', 'documents', new_filename)
+            new_filename = os.path.join(main_folder, 'documents', new_filename)
         elif extension.lower() in music_extensions:
-            new_filename = os.path.join('.', 'music', new_filename)
+            new_filename = os.path.join(main_folder, 'audio', new_filename)
         elif extension.lower() in archive_extensions:
             shutil.unpack_archive(file, os.path.join('.', 'archives', new_filename))
-            new_filename = os.path.join('.', 'archives', new_filename)
+            new_filename = os.path.join(main_folder, 'archives', new_filename)
         else:
             continue
 
