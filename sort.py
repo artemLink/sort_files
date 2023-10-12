@@ -91,14 +91,17 @@ def rename_files():
         if extension.lower() in image_extensions:
             new_filename = os.path.join(main_folder, 'images', new_filename)
         elif extension.lower() in video_extensions:
-            new_filename = os.path.join(main_folder, 'videos', new_filename)
+            new_filename = os.path.join(main_folder, 'video', new_filename)
         elif extension.lower() in document_extensions:
             new_filename = os.path.join(main_folder, 'documents', new_filename)
         elif extension.lower() in music_extensions:
             new_filename = os.path.join(main_folder, 'audio', new_filename)
         elif extension.lower() in archive_extensions:
-            shutil.unpack_archive(file, os.path.join('.', 'archives', new_filename))
-            new_filename = os.path.join(main_folder, 'archives', new_filename)
+            try:
+                shutil.unpack_archive(file, os.path.join(main_folder, 'archives', new_filename))
+                new_filename = os.path.join(main_folder, 'archives', new_filename)
+            except shutil.ReadError:
+                continue
         else:
             continue
 
